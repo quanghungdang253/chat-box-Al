@@ -69,8 +69,12 @@
 
 
 
-require("dotenv").config();
+require("dotenv").config(); // Load biến môi trường từ .env
+const express = require("express");
 const axios = require("axios");
+
+const app = express();
+app.use(express.json());
 
 const WIT_AI_TOKEN = process.env.WIT_AI_TOKEN;
 
@@ -81,14 +85,10 @@ const predefinedAnswers = {
   "Giờ mở cửa của cửa hàng là gì?": "Cửa hàng mở cửa từ 9h sáng đến 9h tối."
 };
 
-module.exports = async (req, res) => {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
+app.post("/api/chat", async (req, res) => {
   const userMessage = req.body.message;
 
-  // Nếu có câu trả lời sẵn
+  // Nếu câu hỏi có trong danh sách có sẵn, trả lời ngay
   if (predefinedAnswers[userMessage]) {
     return res.json({ reply: predefinedAnswers[userMessage] });
   }
@@ -102,10 +102,11 @@ module.exports = async (req, res) => {
       }
     );
 
-    const intents = witResponse.data.intents;
-
     console.log("Wit.ai Response:", JSON.stringify(witResponse.data, null, 2));
 
+    const intents = witResponse.data.intents;
+
+    // Kiểm tra Intent từ Wit.ai
     if (intents.length > 0) {
       const detectedIntent = intents[0].name;
 
@@ -123,5 +124,7 @@ module.exports = async (req, res) => {
     console.error("Lỗi khi gọi Wit.ai:", error);
     return res.status(500).json({ reply: "Có lỗi xảy ra, vui lòng thử lại sau." });
   }
-};
+});
 
+// Vercel yêu cầu export `app`
+module.exports = app;
