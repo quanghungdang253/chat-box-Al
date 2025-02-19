@@ -101,7 +101,7 @@ module.exports = async (req, res) => {
       if (detectedIntent === "store_location") {
         return res.json({ reply: "Cửa hàng của tôi ở Hà Nội." });
       } else if (detectedIntent === "store_products") {
-        return res.json({ reply: "Chúng tôi có điện thoại, laptop và phụ kiện." });
+        return res.json({ reply: "Chúng tôi có điện thoại, laptop và phụ kiện nha bạn ." });
       } else if (detectedIntent === "store_hours") {
         return res.json({ reply: "Cửa hàng mở cửa từ 9h sáng đến 9h tối." });
       }
