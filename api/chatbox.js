@@ -69,8 +69,6 @@
 
 
 
-
-
 require("dotenv").config();
 const axios = require("axios");
 
@@ -83,7 +81,7 @@ const predefinedAnswers = {
   "Giờ mở cửa của cửa hàng là gì?": "Cửa hàng mở cửa từ 9h sáng đến 9h tối."
 };
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
@@ -125,4 +123,5 @@ export default async function handler(req, res) {
     console.error("Lỗi khi gọi Wit.ai:", error);
     return res.status(500).json({ reply: "Có lỗi xảy ra, vui lòng thử lại sau." });
   }
-}
+};
+
