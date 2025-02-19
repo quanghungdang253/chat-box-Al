@@ -82,7 +82,7 @@ const WIT_AI_TOKEN = process.env.WIT_AI_TOKEN;
 const predefinedAnswers = {
   "Cửa hàng của bạn ở đâu?": "Cửa hàng của tôi ở Hà Nội.",
   "Bạn có những sản phẩm nào?": "Chúng tôi có điện thoại, laptop và phụ kiện nha bạn.",
-  "Giờ mở cửa của cửa hàng là gì?": "Cửa hàng mở cửa từ 9h sáng đến 9h tối nha bạn yêu ."
+  "Giờ mở cửa của cửa hàng là gì?": "Cửa hàng mở cửa từ 9h sáng đến 9h tối nha bạn yêu dưddwddwd."
 };
 
 app.post("/api/chat", async (req, res) => {
