@@ -65,10 +65,6 @@
 
 
 
-
-
-
-
 require("dotenv").config(); // Load biến môi trường từ .env
 const express = require("express");
 const axios = require("axios");
@@ -124,6 +120,11 @@ app.post("/api/chat", async (req, res) => {
     console.error("Lỗi khi gọi Wit.ai:", error);
     return res.status(500).json({ reply: "Có lỗi xảy ra, vui lòng thử lại sau." });
   }
+});
+
+// Thông báo khi server được khởi chạy thành công
+app.listen(process.env.PORT || 5000, () => {
+  console.log("Chatbox đã chạy thành công trên Vercel!");
 });
 
 // Vercel yêu cầu export `app`
